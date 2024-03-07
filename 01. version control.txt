@@ -1,0 +1,6 @@
+version control:-
+
+premitive: keeping historical copies
+
+Q) What’s the goal of a version control system?
+-> To keep track of changes made to our files

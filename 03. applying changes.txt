@@ -1,0 +1,38 @@
+patch cpu_usage.py < cpu_usage.diff 
+ 
+Code output:
+patching file cpu_usage.py
+
+
+cat cpu_usage.py 
+
+import psutil
+
+def check_cpu_usage(percent):
+
+    usage = psutil.cpu_percent(1)
+
+    print("DEBUG: usage: {}".format(usage))
+
+    return usage < percent
+
+if not check_cpu_usage(75):
+
+    print("ERROR! CPU is overloaded")
+
+else:
+
+
+    print("Everything ok")
+
+
+
+
+
+
+Question) What does the patch command do?
+It applies the changes contained in a diff file to another file.
+
+Correct
+Right on! While diff is the command that generates the difference between two files, patch is the command that applies those differences to the original file.
+

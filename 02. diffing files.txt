@@ -1,0 +1,70 @@
+arpita-satsangi@DESKTOP-NHSM9BG:~$ ls
+camp  snap  software
+arpita-satsangi@DESKTOP-NHSM9BG:~$ touch rearrange1.py
+arpita-satsangi@DESKTOP-NHSM9BG:~$ gedit rearrange1.py
+
+arpita-satsangi@DESKTOP-NHSM9BG:~$ touch rearrange2.py
+arpita-satsangi@DESKTOP-NHSM9BG:~$ gedit rearrange2.py
+
+
+arpita-satsangi@DESKTOP-NHSM9BG:~$ ls
+camp  rearrange1.py  rearrange2.py  snap  software
+arpita-satsangi@DESKTOP-NHSM9BG:~$ cat rearrange1.py
+import re
+
+def rearrange_name(name):
+
+    result = re.search(r"^([\w .]*), ([\w .]*)$", name)
+
+    if result == None:
+
+        return name
+
+    return "{} {}".format(result[2], result[1])
+arpita-satsangi@DESKTOP-NHSM9BG:~$ cat rearrange2.py
+import re
+
+def rearrange_name(name):
+
+    result = re.search(r"^([\w .-]*), ([\w .-]*)$", name)
+
+    if result == None:
+
+        return name
+
+
+    return "{} {}".format(result[2], result[1])
+arpita-satsangi@DESKTOP-NHSM9BG:~$ diff rearrange1.py rearrange2.py
+5c5
+<     result = re.search(r"^([\w .]*), ([\w .]*)$", name)
+---
+>     result = re.search(r"^([\w .-]*), ([\w .-]*)$", name)
+9a10
+>
+arpita-satsangi@DESKTOP-NHSM9BG:~$ diff -u rearrange1.py rearrange2.py
+--- rearrange1.py       2024-03-07 18:30:46.699274342 +0530
++++ rearrange2.py       2024-03-07 18:32:30.159238775 +0530
+@@ -2,10 +2,11 @@
+
+ def rearrange_name(name):
+
+-    result = re.search(r"^([\w .]*), ([\w .]*)$", name)
++    result = re.search(r"^([\w .-]*), ([\w .-]*)$", name)
+
+     if result == None:
+
+         return name
+
++
+     return "{} {}".format(result[2], result[1])
+arpita-satsangi@DESKTOP-NHSM9BG:~$
+
+
+
+
+Question) What’s the goal of the diff tool?
+-> To show the differences between two files
+
+Correct
+You got it! The diff tool shows all the differences between any type of file. By highlighting what’s changed, it helps us understand the changes and see how the files have been modified.
+

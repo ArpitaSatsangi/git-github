@@ -1,0 +1,62 @@
+arpita-satsangi@DESKTOP-NHSM9BG:~$ gedit disk_usage_fixed.py
+arpita-satsangi@DESKTOP-NHSM9BG:~$ diff -u disk_usage_original.py disk_usage_fixed.py > disk_usage.diff
+arpita-satsangi@DESKTOP-NHSM9BG:~$ cat disk_usage.diff
+--- disk_usage_original.py      2024-03-07 19:06:09.309250983 +0530
++++ disk_usage_fixed.py 2024-03-07 19:13:11.429248126 +0530
+@@ -12,10 +12,10 @@
+     return True
+
+ # Check for at least 2 GB and 10% free
+-if not check_disk_usage("/", 2*2**30, 10):
++if not check_disk_usage("/", 2, 10):
+     print("ERROR: Not enough disk space")
+-    return 1
++    sys.exit(1)
+
+ print("Everything ok")
+-return 0
++sys.exit(0)
+
+
+
+
+
+
+arpita-satsangi@DESKTOP-NHSM9BG:~$ patch disk_usage.py < disk_usage.diff
+patching file disk_usage.py
+arpita-satsangi@DESKTOP-NHSM9BG:~$ cat disk_usage.py
+import shutil
+
+def check_disk_usage(disk, min_absolute, min_percent):
+    """Returns True if there is enough free disk space, false otherwise."""
+    du = shutil.disk_usage(disk)
+    # Calculate the percentage of free space
+    percent_free = 100 * du.free / du.total
+    # Calculate how many free gigabytes
+    gigabytes_free = du.free / 2**30
+    if percent_free < min_percent or gigabytes_free < min_absolute:
+        return False
+    return True
+
+# Check for at least 2 GB and 10% free
+if not check_disk_usage("/", 2, 10):
+    print("ERROR: Not enough disk space")
+    sys.exit(1)
+
+print("Everything ok")
+sys.exit(0)
+
+
+
+
+
+
+
+
+Question) We've prepared a diff file with the changes that need to be applied to the script. What does our colleague need to do now?
+-> Run patch disk_usage.py < disk_usage.diff.
+
+Correct
+You nailed it! To automatically apply changes to a file, 
+we need to run the patch command on the file that we want to modify with the diff file as input.
+
