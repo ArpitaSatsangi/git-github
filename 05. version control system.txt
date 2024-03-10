@@ -1,0 +1,4 @@
+version control system 
+-> keeps tracks of changes we make to our files.
+-> By keeping track of the changes that we make to our files, 
+a VCS lets us know when a file changed, who changed it, and also lets us easily roll back those changes.
